@@ -10,13 +10,15 @@
         <hr>
         <div>我的名字:{{ myName }} - toRefs的使用</div>
         <button @click="changeMyName">修改名字</button>
-
-
+        <hr>
+        <div>姓：<input v-model="firstName"></div>
+        <div>名：<input v-model="lastName"></div>
+        <div>全名：{{ fullName }}</div>
     </div>
 </template>
 
 <script lang="ts">
-    import { ref, reactive, toRefs } from "vue"
+    import { ref, reactive, toRefs, computed } from "vue"
     export default {
         name:'Person'
     }
@@ -35,10 +37,19 @@
         car.band = 'BMW'
     }
 
+    // ----------------
+
     let person = reactive({myName: 'jack', myHome: 'shjs'})
     let {myName, myHome} = toRefs(person)
     function changeMyName(){
         myName.value = 'rose'
     }
+
+    // ----------------
+    let firstName = ref('zhang')
+    let lastName = ref('san')
+    let fullName = computed(() => {
+        return firstName.value + '-' + lastName.value
+    })
 
 </script>
