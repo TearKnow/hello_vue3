@@ -8,12 +8,15 @@
         <div>汽车品牌: {{ car.band }}</div>
         <button @click="changeCar">修改汽车</button>
         <hr>
+        <div>我的名字:{{ myName }} - toRefs的使用</div>
+        <button @click="changeMyName">修改名字</button>
+
 
     </div>
 </template>
 
 <script lang="ts">
-    import { ref, reactive } from "vue"
+    import { ref, reactive, toRefs } from "vue"
     export default {
         name:'Person'
     }
@@ -32,7 +35,10 @@
         car.band = 'BMW'
     }
 
-
-
+    let person = reactive({myName: 'jack', myHome: 'shjs'})
+    let {myName, myHome} = toRefs(person)
+    function changeMyName(){
+        myName.value = 'rose'
+    }
 
 </script>
